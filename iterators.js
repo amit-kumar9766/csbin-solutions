@@ -84,12 +84,13 @@ function setIterator(set) {
 
 function indexIterator(arr) {
   // YOUR CODE HERE
-  let i=0
-  const iterator=()=>{
-    let element=[i,arr[i]]
+  let i = 0;
+  const iterator = () => {
+    let element = [i, arr[i]];
     i++;
     return element;
-  }
+  };
+  return iterator;
 }
 
 // Uncomment the lines below to test your work
@@ -115,7 +116,18 @@ Words.prototype[Symbol.iterator] = function () {
 
 // CHALLENGE 7
 
-function valueAndPrevIndex(array) {}
+function valueAndPrevIndex(array) {
+  let i = 0;
+  return {
+    sentence: function () {
+      i++;
+      if (i === 1) {
+        return "that is the first element";
+      }
+      return `${array[i - 1]} was found after index ${i - 2}`;
+    },
+  };
+}
 
 const returnedSentence = valueAndPrevIndex([4, 5, 6]);
 console.log(returnedSentence.sentence());
@@ -124,7 +136,15 @@ console.log(returnedSentence.sentence());
 
 //CHALLENGE 8
 
-function* createConversation(string) {}
+function* createConversation(str) {
+    yield setInterval(function() {
+        if (str == "english") {
+          console.log("hello there");
+        } else {
+          console.log("gibberish");
+        }
+      }, 3000);
+}
 
 console.log(createConversation("english").next());
 
